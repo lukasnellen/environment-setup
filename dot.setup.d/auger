@@ -1,0 +1,53 @@
+# Lukas's local auger environment
+
+export SOFTWAREBASE=$HOME/auger/software/eclipse/Offline-Install
+export DISTBASE=$HOME/auger/software/eclipse/Ape
+
+cfg_level=3
+case "${1}" in
+    # ape config only
+    -a) cfg_level=0
+	shift
+	;;
+    # CDAS externals
+    -c) cfg_level=1
+	shift
+	;;
+    # Offline externals
+    -x) cfg_level=2
+	shift
+	;;
+    # Offline test install
+    -t) export SOFTWAREBASE=$HOME/auger/software/eclipse/Offline-Install
+        shift
+	;;
+esac
+
+
+export APERC=$HOME/.aperc.auger${1}
+if [ ! -e "${APERC}" ]; then
+    echo === Ape rc file ${APERC} does not exist
+    # this is sourced in a function, return not exit
+    return 
+fi
+
+#level 1: cdas externals (only)
+if [ "${cfg_level}" -eq 1 ]
+then
+    eval `$DISTBASE/ape sh cdasexternals`
+    return
+fi
+
+#level 2: externals
+if [ "${cfg_level}" -ge 2 ]
+then
+    eval `$DISTBASE/ape sh externals`
+fi
+
+#level 3: full offline
+if [ "${cfg_level}" -ge 3 ]
+then
+  export AUGEROFFLINEROOT=$SOFTWAREBASE
+  eval `$SOFTWAREBASE/bin/auger-offline-config --env-sh`
+fi
+

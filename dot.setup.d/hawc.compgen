@@ -1,0 +1,6 @@
+# -*- shell-script -*-
+source ${HOME}/.setup.d/hawc.def
+
+builtin cd ${DISTRIBUTIONS}
+list=$(for i in *; do [ -d $i ] && echo ${i/ape-hawc-/}; done )
+echo $(compgen -W "${list}" -- "${1}" )

@@ -1,0 +1,8 @@
+# -*- shell-script -*-
+#
+# Keep versioned paths here
+#
+export CORSIKABASE=${HOME}/CORSIKA
+export CORSIKADIR=${CORSIKABASE}/corsika-74100
+export COAST_USER_DIR=${CORSIKABASE}/coast-interfaces-v4r1p3
+export COAST_DIR=${CORSIKABASE}/coast-v4r5-installed

@@ -1,0 +1,15 @@
+# root environment.
+# parameter 1 selects which root environment to use:
+#   Use HAWC's by default, Auger's as alternative
+
+if [ "$1" == "auger" ]; then
+  export APERC=$HOME/.aperc.auger
+  export SOFTWAREBASE=$HOME/auger/software/eclipse
+  export DISTBASE=$HOME/auger/software/eclipse/Ape
+else
+  export APEVERSION=2.00.03
+  export APERC=$HOME/.aperc.hawc
+  export SOFTWAREBASE=$HOME/HAWC/software/eclipse
+  export DISTBASE=$HOME/HAWC/software/dist/ape-hawc-$APEVERSION
+fi
+eval `$DISTBASE/ape sh root`

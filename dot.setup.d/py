@@ -1,0 +1,3 @@
+# -*- shell-script -*-
+source ${HOME}/.setup.d/py.def
+[ -f ${PYENV}/${1}/bin/activate ] && source ${PYENV}/${1}/bin/activate

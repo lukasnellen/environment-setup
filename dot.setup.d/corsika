@@ -1,0 +1,19 @@
+# -*- shell-script -*-
+# setup environment for corsika: versioned paths and other common 
+source $HOME/.setup.d/corsika.def
+
+export CORSIKABIN=${CORSIKADIR}/run
+
+if [ "$1" ];
+then
+    COAST_IF=${1}
+else
+    COAST_IF=plot2D
+fi
+export COAST_USER_LIB=${COAST_USER_DIR}/${COAST_IF}
+
+[ "$ROOTSYS" ] || source $HOME/.setup.d/root
+
+cleanpath=$( echo $DYLD_LIBRARY_PATH | tr ':' '\n' | egrep -v "$COAST_DIR|$COAST_USER_DIR" | tr '\n' ':' )
+
+export DYLD_LIBRARY_PATH=${cleanpath::${#cleanpath}-1}:${COAST_DIR}/lib:${COAST_USER_LIB}

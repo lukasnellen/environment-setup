@@ -1,0 +1,5 @@
+# -*- shell-script -*-
+
+builtin cd $HOME
+list=$(for i in .aperc.auger*; do [ ${i:${#i}-1} != "~" ] && echo ${i/.aperc.auger/}; done )
+echo $(compgen -W "-a -c -x -t ${list}" -- "${1}" )

@@ -1,0 +1,40 @@
+# -*- shell-script -*-
+# Lukas's local hawc environment
+source ${HOME}/.setup.d/hawc.def
+
+cfg_level=2
+case "${1}" in
+    -a) cfg_level=0
+	shift
+	;;
+    -x) cfg_level=1
+	shift
+	;;
+esac
+
+if [ "${1}" ]
+then
+    export APEVERSION=${1}
+else
+    export APEVERSION=2.01.01
+fi
+
+#level 0: general environemnt
+export APERC=$HOME/.aperc.hawc
+export SOFTWAREBASE=$HOME/HAWC/software/eclipse
+export DISTBASE=${DISTRIBUTIONS}/ape-hawc-$APEVERSION
+export HAWCROOT=$HOME/HAWC/hawcroot
+export CONFIG_HAWC=$HOME/HAWC/software/stage/workspaces/config-hawc
+
+#level 1: externals
+if [ "${cfg_level}" -ge 1 ]
+then
+    eval `$DISTBASE/ape sh externals`
+fi
+
+#level2: aerie
+if [ "${cfg_level}" -ge 2 ]
+then
+    eval `$SOFTWAREBASE/aerie/install/bin/hawc-config --env-sh`
+fi
+

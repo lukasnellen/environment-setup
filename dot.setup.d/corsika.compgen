@@ -1,0 +1,4 @@
+# -*- shell-script -*-
+source $HOME/.setup.d/corsika.def
+builtin cd ${COAST_USER_DIR}
+compgen -d -- ${1}
