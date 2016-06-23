@@ -14,3 +14,6 @@ in the ``~/.bashrc`` file.
 The ``~/.setup.d`` directory contains the setup files, without any extension. 
 Customized completions are provided by the ``*.compgen`` files. The ``.def``
 files provide common definitions used for project setup and completions.
+
+You probably want to customize the files in ``~/.setup.d`` to reflect your 
+setup and working habits
