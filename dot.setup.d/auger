@@ -1,6 +1,6 @@
 # Lukas's local auger environment
 
-export SOFTWAREBASE=$HOME/auger/software/eclipse/Offline-Install
+export SOFTWAREBASE=offline
 export DISTBASE=$HOME/auger/software/eclipse/Ape
 
 cfg_level=3
@@ -39,7 +39,7 @@ then
 fi
 
 #level 2: externals
-if [ "${cfg_level}" -ge 2 ]
+if [ "${cfg_level}" -eq 2 ]
 then
     eval `$DISTBASE/ape sh externals`
 fi
@@ -47,7 +47,13 @@ fi
 #level 3: full offline
 if [ "${cfg_level}" -ge 3 ]
 then
-  export AUGEROFFLINEROOT=$SOFTWAREBASE
-  eval `$SOFTWAREBASE/bin/auger-offline-config --env-sh`
+  if [ "$SOFTWAREBASE" = "offline" ]; then 
+    # ape installed offline
+    eval `$DISTBASE/ape sh offline`
+  else
+    # Installation built from source
+    eval `$DISTBASE/ape sh externals`
+    export AUGEROFFLINEROOT=$SOFTWAREBASE
+  fi
+  eval `$AUGEROFFLINEROOT/bin/auger-offline-config --env-sh`
 fi
-
