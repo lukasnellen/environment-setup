@@ -3,7 +3,7 @@
 export SOFTWAREBASE=offline
 export DISTBASE=$HOME/auger/software/eclipse/Ape
 
-cfg_level=3
+cfg_level=4
 case "${1}" in
     # ape config only
     -a) cfg_level=0
@@ -23,8 +23,17 @@ case "${1}" in
 	;;
 esac
 
+# Offline select packages
+if [ "${1}" = "-p" ]; then
+  cfg_level=3
+  shift
+  packages=${1}
+  shift
+fi
 
 export APERC=$HOME/.aperc.auger${1}
+shift
+
 if [ ! -e "${APERC}" ]; then
     echo === Ape rc file ${APERC} does not exist
     # this is sourced in a function, return not exit
@@ -42,10 +51,18 @@ fi
 if [ "${cfg_level}" -eq 2 ]
 then
     eval `$DISTBASE/ape sh externals`
+    return
 fi
 
-#level 3: full offline
-if [ "${cfg_level}" -ge 3 ]
+#level 3: select packages
+if [ "${cfg_level}" -eq 3 ]
+then
+    eval `$DISTBASE/ape sh ${packages}`
+    return
+fi
+
+#level 4: full offline
+if [ "${cfg_level}" -ge 4 ]
 then
   if [ "$SOFTWAREBASE" = "offline" ]; then 
     # ape installed offline
