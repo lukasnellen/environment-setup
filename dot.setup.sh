@@ -12,9 +12,10 @@
 
 _setup_complete () {
     local cur="$2"
+    local prev="$3"
     if [ ${COMP_CWORD} -gt 1 -a -f "${HOME}/.setup.d/${COMP_WORDS[1]}.compgen" ]
     then
-	COMPREPLY=( $(bash "${HOME}/.setup.d/${COMP_WORDS[1]}.compgen" "${cur}" ) )
+	COMPREPLY=( $(bash "${HOME}/.setup.d/${COMP_WORDS[1]}.compgen" "${cur}" "${prev}") )
     else
 	COMPREPLY=( $(builtin cd $HOME/.setup.d && \
 		   compgen -f -X "*[~.]*" -- "${cur}" ) )
