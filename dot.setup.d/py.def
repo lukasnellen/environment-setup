@@ -1,2 +1,3 @@
 # -*- shell-script -*-
-export PYENV=${HOME}/pyenv
+#export PYENV=${HOME}/pyenv
+PYENV=${HOME}/pyenv

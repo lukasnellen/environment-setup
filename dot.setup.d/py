@@ -1,3 +1,5 @@
 # -*- shell-script -*-
 source ${HOME}/.setup.d/py.def
-[ -f ${PYENV}/${1}/bin/activate ] && source ${PYENV}/${1}/bin/activate
+_pyenv=${1}
+shift
+[ -f ${PYENV}/${_pyenv}/bin/activate ] && source ${PYENV}/${_pyenv}/bin/activate
