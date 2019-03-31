@@ -1,0 +1,3 @@
+# -*- shell-script -*-
+source ${HOME}/.setup.d/conda.def
+[ -f ${CONDA_PREFIX}/bin/activate ] && source ${CONDA_PREFIX}/bin/activate
