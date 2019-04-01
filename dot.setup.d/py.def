@@ -1,3 +1,5 @@
 # -*- shell-script -*-
 #export PYENV=${HOME}/pyenv
 PYENV=${HOME}/pyenv
+CONDA_PREFIX=${PYENV}/conda
+CONDA_ENVS=${CONDA_PREFIX}/envs

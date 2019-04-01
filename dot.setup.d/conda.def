@@ -1,2 +1,0 @@
-# -*- shell-script -*-
-CONDA_PREFIX=${HOME}/conda

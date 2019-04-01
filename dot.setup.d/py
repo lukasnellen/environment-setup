@@ -2,4 +2,10 @@
 source ${HOME}/.setup.d/py.def
 _pyenv=${1}
 shift
-[ -f ${PYENV}/${_pyenv}/bin/activate ] && source ${PYENV}/${_pyenv}/bin/activate
+if [ -f ${PYENV}/${_pyenv}/bin/activate ]; then
+    source ${PYENV}/${_pyenv}/bin/activate
+elif [ -d ${CONDA_ENVS}/${_pyenv} ]; then
+    source ${CONDA_PREFIX}/bin/activate ${_pyenv}
+else
+    source ${CONDA_PREFIX}/bin/activate ${PYENV}/${_pyenv}
+fi

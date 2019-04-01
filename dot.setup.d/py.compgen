@@ -1,4 +1,6 @@
 # -*- shell-script -*-
 # completions for python environments
 source ${HOME}/.setup.d/py.def
-echo $(builtin cd ${PYENV} && compgen -d -- "${1}" )
+_py_list=$(builtin cd ${PYENV} && compgen -d -- "${1}" )
+_conda_list=$(builtin cd ${CONDA_ENVS} && compgen -d -- "${1}" )
+echo ${_py_list} ${_conda_list}
