@@ -1,5 +1,5 @@
 # -*- shell-script -*-
 # completions for conda environments
 source ${HOME}/.setup.d/py.def
-_list=$(${CONDA_PREFIX}/bin/conda env list | awk '/^[^# \t]/ {print $1}')
-echo $(compgen -W "${_list}" -- "${1}")
+_conda_list=$(builtin cd ${CONDA_ENVS} && compgen -d -- "${1}" )
+echo base ${_conda_list}
